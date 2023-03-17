@@ -34,6 +34,7 @@ def find_gate(name: str) -> int:
                     break
                 else:
                     signal_value = find_gate(lines[i][0])
+                    signal_value = signal_value & 0xffff
                     gates[name] = signal_value
                     break
             elif len(lines[i]) == 4:
@@ -42,9 +43,26 @@ def find_gate(name: str) -> int:
                 gates[name] = signal_value
                 break
             elif len(lines[i]) == 5:
-                gates[name] = ops[lines[i][1]](find_gate(lines[i][0]), find_gate(lines[i][2]))
-                signal_value = gates[name]
-                break
+                if lines[i][2].isnumeric():
+                    signal_value = ops[lines[i][1]](find_gate(lines[i][0]), int(lines[i][2]))
+                    signal_value = signal_value & 0xffff
+                    gates[name] = signal_value
+                    break
+                elif lines[i][0].isnumeric():
+                    signal_value = ops[lines[i][1]](int(lines[i][0]), find_gate(lines[i][2]))
+                    signal_value = signal_value & 0xffff
+                    gates[name] = signal_value
+                    break
+                elif lines[i][2].isnumeric() and lines[i][0].isnumeric():
+                    signal_value = ops[lines[i][1]](int(lines[i][0]), int(lines[i][2]))
+                    signal_value = signal_value & 0xffff
+                    gates[name] = signal_value
+                    break
+                else:
+                    signal_value = ops[lines[i][1]](find_gate(lines[i][0]), find_gate(lines[i][2]))
+                    signal_value = signal_value & 0xffff
+                    gates[name] = signal_value
+                    break
 
     return signal_value
 
