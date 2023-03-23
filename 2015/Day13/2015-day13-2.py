@@ -11,7 +11,6 @@ for i in range(len(lines)):
 people = list(people)
 people.append("Marta")
 people.sort()
-print(people)
 
 matrix = [[0] * len(people) for i in range(len(people))]
 
