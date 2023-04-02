@@ -137,10 +137,6 @@ if __name__ == '__main__':
     grid = data
 
     for i in range(100):
-        grid[0][0] = "#"
-        grid[0][len(grid) - 1] = "#"
-        grid[len(grid) - 1][0] = "#"
-        grid[len(grid) - 1][len(grid) - 1] = "#"
         grid = million_lights(grid)
 
     print(count_lights(grid))
