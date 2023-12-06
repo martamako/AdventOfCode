@@ -57,6 +57,25 @@ public class Game {
         return true;
     }
 
+    public int powerOfCubes(){
+        int maxRed = maximumColor("red"), maxGreen = maximumColor("green"), maxBlue = maximumColor("blue");
+        return maxRed * maxGreen * maxBlue;
+    }
+
+    public int maximumColor(String color) {
+        int maxColor = 0;
+        for(ArrayList<Tuple<Integer, String>> record: records){
+            for(Tuple<Integer, String> tuple : record){
+                if(tuple.getColor().equals(color)){
+                    if(tuple.getNumber() > maxColor){
+                        maxColor = tuple.getNumber();
+                    }
+                }
+            }
+        }
+        return maxColor;
+    }
+
     @Override
     public String toString() {
         return "Game{" +

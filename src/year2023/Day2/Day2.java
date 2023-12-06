@@ -13,7 +13,8 @@ public class Day2 {
                 String line = fileScanner.nextLine();
                 processInfo(line, games);
             }
-            System.out.println(countGames(games));
+            System.out.println(countGames(games)); //Part 1
+            System.out.println(powerGames(games)); //Part 2
         } catch(Exception e){
             System.out.println("No such file " + e.getMessage());
         }
@@ -38,5 +39,13 @@ public class Day2 {
             }
         }
         return sum;
+    }
+
+    public static int powerGames(ArrayList<Game> games){
+        int power = 0;
+        for(Game game: games){
+            power += game.powerOfCubes();
+        }
+        return power;
     }
 }
