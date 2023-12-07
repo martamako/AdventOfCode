@@ -25,6 +25,13 @@ public class Number {
         this.y = y;
     }
 
+    public boolean isNumbersCoordinate(int x, int y){
+        if(this.y == y){
+            return this.x <= x && x < this.x + this.value.length();
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Number{" +

@@ -21,7 +21,6 @@ public class Day3 {
             new int[]{0, 1}));
 
     public static void main(String[] args) {
-
         char[][] map;
         ArrayList<Number> numbers = new ArrayList<>();
         try (Scanner fileScanner = new Scanner(new File(filePath))){
@@ -37,6 +36,7 @@ public class Day3 {
             }
             getNumbers(map, numbers);
             System.out.println(addNumbers(numbers, map));
+            System.out.println(getGearsRatio(numbers, map));
         } catch(Exception e){
             System.out.println("No such file " + e.getMessage());
         }
@@ -88,6 +88,42 @@ public class Day3 {
         }
         return false;
     }
+
+    static int getGearsRatio(ArrayList<Number> numbers, char[][] map){
+        int ratio = 0;
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size; j++){
+                if(map[i][j] == '*'){
+                    ArrayList<Integer> nums = getGearsNumbers(numbers, map, j, i);
+                    if(nums.size() == 2){
+                        ratio += nums.get(0) * nums.get(1);
+                    }
+                }
+            }
+        }
+        return ratio;
+    }
+
+    static ArrayList<Integer> getGearsNumbers(ArrayList<Number> numbers, char[][] map, int x, int y){
+        ArrayList<Integer> nums = new ArrayList<>();
+        for(int[] direction: dir){
+            if(isInBound(direction, x, y)){
+                char ch = map[y + direction[1]][x + direction[0]];
+                if(Character.isDigit(ch)){
+                    for(Number number: numbers){
+                        if(number.isNumbersCoordinate(x + direction[0], y + direction[1])){
+                            if(!nums.contains(Integer.parseInt(number.getValue()))){
+                                nums.add(Integer.parseInt(number.getValue()));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return nums;
+    }
+
 
     static boolean isInBound(int[] direction, int x, int y){
         return direction[0] + x >= 0 && direction[0] + x < size
