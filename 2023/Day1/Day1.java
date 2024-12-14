@@ -1,4 +1,4 @@
-package Day1;
+package year2023.Day1;
 
 import java.io.File;
 import java.util.*;
@@ -6,13 +6,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day1 {
+    static String filePath = "src/year2023/Day1/input.txt";
     public static void main(String[] args) {
         part1();
         part2();
     }
 
     public static void part1(){
-        try (Scanner fileScanner = new Scanner(new File("src/Day1/input.txt"))) {
+        try (Scanner fileScanner = new Scanner(new File(filePath))) {
             int sum = 0;
             while (fileScanner.hasNextLine()) {
                 int first = 0, last = 0;
@@ -44,7 +45,7 @@ public class Day1 {
                 { "one", 1 }, { "two", 2 }, { "three", 3 }, { "four", 4 }, { "five", 5 }, { "six", 6 },
                 { "seven", 7 }, { "eight", 8 }, { "nine", 9 }, { "zero", 0 },
         }).collect(Collectors.toMap(data -> (String) data[0], data -> (Integer) data[1]));
-        try (Scanner fileScanner = new Scanner(new File("src/Day1/input.txt"))) {
+        try (Scanner fileScanner = new Scanner(new File(filePath))) {
             int sum = 0;
 
             while (fileScanner.hasNextLine()) {
